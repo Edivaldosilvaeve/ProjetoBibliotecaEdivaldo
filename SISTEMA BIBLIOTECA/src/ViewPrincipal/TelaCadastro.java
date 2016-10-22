@@ -143,6 +143,11 @@ public class TelaCadastro extends javax.swing.JFrame {
         jMenu3.setText("Emprestimo");
 
         jMenuItem6.setText("Emprestimo");
+        jMenuItem6.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem6ActionPerformed(evt);
+            }
+        });
         jMenu3.add(jMenuItem6);
 
         jMenuBar1.add(jMenu3);
@@ -201,6 +206,13 @@ public class TelaCadastro extends javax.swing.JFrame {
         jDesktopPane1.add(cadastroLivro);
         cadastroLivro.setVisible(true);
     }//GEN-LAST:event_jMenuItem4ActionPerformed
+
+    private void jMenuItem6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem6ActionPerformed
+         Emprestimo emprestimo = new Emprestimo();
+        this.add(emprestimo);
+        jDesktopPane1.add(emprestimo);
+        emprestimo.setVisible(true);
+    }//GEN-LAST:event_jMenuItem6ActionPerformed
 
     /**
      * @param args the command line arguments

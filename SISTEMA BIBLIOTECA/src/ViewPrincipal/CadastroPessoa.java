@@ -28,8 +28,7 @@ Pessoa pessoa;
      */
     public CadastroPessoa() {
         initComponents();
-        setModelo();
-        txtNome.setEditable(false);
+        setModelo();        
         sistemaController = new SistemaController();
         Dimension tamTela = Toolkit.getDefaultToolkit().getScreenSize();
         Dimension tamJan = getSize();
@@ -175,6 +174,11 @@ Pessoa pessoa;
         btnLimpar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/Limpeza.png"))); // NOI18N
 
         btnGravar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/Save-icon.png"))); // NOI18N
+        btnGravar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnGravarActionPerformed(evt);
+            }
+        });
 
         txtNome.setEnabled(false);
 
@@ -300,12 +304,16 @@ Pessoa pessoa;
     }// </editor-fold>//GEN-END:initComponents
 
     private void txtSexoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtSexoActionPerformed
-        // TODO add your handling code here:
+       
     }//GEN-LAST:event_txtSexoActionPerformed
 
     private void btnNovoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNovoActionPerformed
         novo();
     }//GEN-LAST:event_btnNovoActionPerformed
+
+    private void btnGravarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGravarActionPerformed
+        addPessoa();
+    }//GEN-LAST:event_btnGravarActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -460,7 +468,6 @@ Pessoa pessoa;
     }
 
     private void novo() {
-        txtPesquisa.setEnabled(true);
         txtNome.setEnabled(true);
         txtCPF.setEnabled(true);
         txtEndereco.setEnabled(true);
@@ -469,20 +476,5 @@ Pessoa pessoa;
         txtDataNascimento.setEnabled(true);
         txtFone.setEnabled(true);
         btnEditar.setEnabled(true);
-        btnGravar.setEnabled(true);
-       //btnBuscar.setEnabled(true);
-
-    }
-
-    public void pesquisar() {
-        setModelo();
-        ArrayList<Pessoa> lista;
-        lista = sistemaController.getPesquisar(txtPesquisa.getText());
-
-        for (Pessoa us : lista) {
-            insereTabela(us);
-        }
-        pesquisa = lista;
-
     }
 }

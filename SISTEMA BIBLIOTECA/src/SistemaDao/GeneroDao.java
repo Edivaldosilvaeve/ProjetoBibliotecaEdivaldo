@@ -12,6 +12,8 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 
 /**
@@ -32,15 +34,29 @@ public class GeneroDao {
         }
 
     }
+    public Genero getGeneroById(int id) {
+        ResultSet rs;
+        Genero genero;
 
-    public boolean insereUsuario(Genero genero) {
+        try {
+            rs = st.executeQuery("SELECT IDGENERO, GENERO FROM GENERO WHERE = IDLOGIN = " + id);
+
+        } catch (SQLException ex) {
+            Logger.getLogger(SistemaDao.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+        return null;
+    }
+
+
+    public boolean insereGenero(Genero genero) {
         String sql = "";
         Date data = new Date();
         ResultSet rs;
         int id = 0;
         try {
 
-            sql = "SELECT COALESCE(MAX(IDGENERO)+1,1) AS IDGENERO FROM GENERO";
+            sql = "SELECT COALESCE(MAX(IDGENERO)+1,1) AS IDGENERO FROM GENEROS";
             rs = st.executeQuery(sql);
             while (rs.next()) {
                 id = rs.getInt("IDGENERO");
@@ -48,7 +64,7 @@ public class GeneroDao {
 
             genero.setIdGenero(id);
 
-            sql = "INSERT INTO genero (idgenero, genero)"
+            sql = "INSERT INTO generos (idgenero, genero)"
                     + "VALUES (" + genero.getIdGenero()
                     + "  ,  '" + genero.getGenero()
                     + "')";
@@ -65,9 +81,9 @@ public class GeneroDao {
 
     public boolean updateGenero(Genero genero) {
         Date data = new Date();
-        String sql = "UPDATE login SET "
-                + "idlogin=" + genero.getIdGenero() + ","
-                + "idfuncionario=" + genero.getGenero() + ","
+        String sql = "UPDATE generos SET "
+                + "idgenero=" + genero.getIdGenero() + ","
+                + "genero=" + genero.getGenero() + ","
                 + " WHERE idgenero=" + genero.getIdGenero() + ",";
         try {
             st.executeUpdate(sql);

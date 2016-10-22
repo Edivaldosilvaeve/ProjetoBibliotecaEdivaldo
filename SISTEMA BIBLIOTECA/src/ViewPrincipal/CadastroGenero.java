@@ -7,7 +7,6 @@ package ViewPrincipal;
 
 import Controller.GeneroController;
 import Model.Genero;
-import Model.Usuario;
 import java.awt.Dimension;
 import java.awt.Point;
 import java.awt.Toolkit;
@@ -27,6 +26,7 @@ public class CadastroGenero extends javax.swing.JInternalFrame {
      */
     public CadastroGenero() {
         initComponents();
+        generoController = new GeneroController();
         Dimension tamTela = Toolkit.getDefaultToolkit().getScreenSize();
         Dimension tamJan = getSize();
         setLocation(new Point((tamTela.width - tamJan.width) / 2, (tamTela.height - tamJan.height) / 2));
@@ -58,6 +58,8 @@ public class CadastroGenero extends javax.swing.JInternalFrame {
 
         jLabel2.setText("Genero");
 
+        txtIdGenero.setEnabled(false);
+
         jButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/Save-icon.png"))); // NOI18N
         jButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -66,6 +68,11 @@ public class CadastroGenero extends javax.swing.JInternalFrame {
         });
 
         jButton2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/Limpeza.png"))); // NOI18N
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
+            }
+        });
 
         jButton3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/Lixeira_1.png"))); // NOI18N
 
@@ -121,7 +128,7 @@ public class CadastroGenero extends javax.swing.JInternalFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-
+        addGenero();
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void btnPesquisarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPesquisarActionPerformed
@@ -130,6 +137,10 @@ public class CadastroGenero extends javax.swing.JInternalFrame {
         pesquisaGenero.setVisible(true);
         setGeneroSelecionado(pesquisaGenero.getGeneroSelecionado());
     }//GEN-LAST:event_btnPesquisarActionPerformed
+
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+        limpaCampos();
+    }//GEN-LAST:event_jButton2ActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -149,22 +160,19 @@ public class CadastroGenero extends javax.swing.JInternalFrame {
         }
         if (genero == null) {
             genero = new Genero();
-        }
+        }      
+        
+        genero.setGenero(txtGenero.getText());
+        
 
-        /*
-        genero.setIdGenero(Integer.parseInt(txtIdFuncionario.getText()));
-        genero.setLogin(txtNome.getText());
-        usuario.setSenha(txtSenha.getText());
-        usuario.setIdGrupo(Integer.parseInt(txtIdGrupo.getText()));
-
-        if (usuarioController.insereUsuario(usuario)) {
+        if (generoController.insereGenero(genero)) {
             JOptionPane.showMessageDialog(null, "Usuario Gravado com Sucesso");
             //listaUsuario();
             // insereTabela(pessoa);
            limpaCampos();
 
         }
-         */
+         
     }
 
     private void setGeneroSelecionado(Genero genero) {
@@ -172,5 +180,13 @@ public class CadastroGenero extends javax.swing.JInternalFrame {
         txtIdGenero.setText(genero.getIdGenero() + "");
 
     }
+    
+    
+    
+    private void limpaCampos(){
+        genero = null;
+        txtGenero.setText("");
+    }
+    
 
 }

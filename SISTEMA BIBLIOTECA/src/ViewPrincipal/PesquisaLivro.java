@@ -6,7 +6,9 @@
 package ViewPrincipal;
 
 import Controller.GeneroController;
+import Controller.LivroController;
 import Model.Genero;
+import Model.Livro;
 import java.util.ArrayList;
 import javax.swing.table.DefaultTableModel;
 
@@ -14,20 +16,25 @@ import javax.swing.table.DefaultTableModel;
  *
  * @author Edivaldo
  */
-public class PesquisaGenero extends javax.swing.JDialog {
+public class PesquisaLivro extends javax.swing.JDialog {
 
-    private ArrayList<Genero> listaGenero;
+    private ArrayList<Livro> listaLivro;
     private DefaultTableModel modelo;
-    private Genero genero;
+    private Livro livro;
 
     /**
-     * Creates new form PesquisaGenero
+     * Creates new form PesquisaLivro
      */
-    public PesquisaGenero(java.awt.Frame parent, boolean modal) {
+    public PesquisaLivro(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
         setModelo();
-        pesquisar();
+        pesquisar(0);
+    }
+
+    public PesquisaLivro(int id) {
+        pesquisar(id);
+        pegaIdSelecionado(id);
     }
 
     /**
@@ -91,7 +98,7 @@ public class PesquisaGenero extends javax.swing.JDialog {
                 .addComponent(txtPesquisa, javax.swing.GroupLayout.PREFERRED_SIZE, 245, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(btnPesquisar)
-                .addContainerGap(18, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
@@ -103,23 +110,23 @@ public class PesquisaGenero extends javax.swing.JDialog {
                     .addComponent(txtPesquisa, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btnPesquisar))
                 .addGap(18, 18, 18)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 390, Short.MAX_VALUE))
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 248, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    private void txtPesquisaKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtPesquisaKeyReleased
+        pesquisar(0);
+    }//GEN-LAST:event_txtPesquisaKeyReleased
+
     private void btnPesquisarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPesquisarActionPerformed
-        pesquisar();
+        pesquisar(0);
     }//GEN-LAST:event_btnPesquisarActionPerformed
 
     private void tblGeneroMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblGeneroMouseClicked
-        pegaIdSelecionado();
+        pegaIdSelecionado(0);
     }//GEN-LAST:event_tblGeneroMouseClicked
-
-    private void txtPesquisaKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtPesquisaKeyReleased
-         pesquisar();
-    }//GEN-LAST:event_txtPesquisaKeyReleased
 
     /**
      * @param args the command line arguments
@@ -138,20 +145,20 @@ public class PesquisaGenero extends javax.swing.JDialog {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(PesquisaGenero.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(PesquisaLivro.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(PesquisaGenero.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(PesquisaLivro.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(PesquisaGenero.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(PesquisaLivro.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(PesquisaGenero.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(PesquisaLivro.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
 
         /* Create and display the dialog */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                PesquisaGenero dialog = new PesquisaGenero(new javax.swing.JFrame(), true);
+                PesquisaLivro dialog = new PesquisaLivro(new javax.swing.JFrame(), true);
                 dialog.addWindowListener(new java.awt.event.WindowAdapter() {
                     @Override
                     public void windowClosing(java.awt.event.WindowEvent e) {
@@ -170,46 +177,50 @@ public class PesquisaGenero extends javax.swing.JDialog {
     private javax.swing.JTable tblGenero;
     private javax.swing.JTextField txtPesquisa;
     // End of variables declaration//GEN-END:variables
-
-    private void pesquisar() {
-        setModelo();
-        ArrayList<Genero> lista;
-        lista = new GeneroController().getGeneroByNome(txtPesquisa.getText());
-
-        for (Genero us : lista) {
-            insereTabela(us);
+ private void pesquisar(int id) {
+        ArrayList<Livro> lista;
+        if (id == 0) {
+            lista = new LivroController().getLivroByNome(txtPesquisa.getText());
+            setModelo();
+            for (Livro livro : lista) {
+                insereTabela(livro);
+            }
+        } else {
+            lista = new LivroController().getLivroByNome("");
         }
-        listaGenero = lista;
+        listaLivro = lista;
     }
 
-    public void insereTabela(Genero genero) {
+    public void insereTabela(Livro livro) {
         Object[] linha = new Object[9];
-        linha[0] = genero.getIdGenero();
-        linha[1] = genero.getGenero();
+        linha[0] = livro.getIdLivro();
+        linha[1] = livro.getTitulo();
         modelo.addRow(linha);
     }
 
     private void setModelo() {
         modelo = new DefaultTableModel();
-        modelo.addColumn("IdGenero");
-        modelo.addColumn("Genero");
+        modelo.addColumn("IDLivro");
+        modelo.addColumn("Titulo");
         tblGenero.setModel(modelo);
     }
 
-    private void pegaIdSelecionado() {
-        int linha = tblGenero.getSelectedRow();
-        int id = Integer.parseInt(modelo.getValueAt(linha, 0).toString());
-        for (Genero gn : listaGenero) {
-            if (id == gn.getIdGenero()) {
-                genero = gn;
+    private void pegaIdSelecionado(int id) {
+
+        if (id == 0) {
+            int linha = tblGenero.getSelectedRow();
+            id = Integer.parseInt(modelo.getValueAt(linha, 0).toString());
+        }
+        for (Livro livro : listaLivro) {
+            if (id == livro.getIdLivro()) {
+                this.livro = livro;
             }
         }
         this.dispose();
     }
 
-    public Genero getGeneroSelecionado() {
-        return genero;
+    public Livro getLivroSelecionado() {
+        return livro;
     }
-        
 
 }
