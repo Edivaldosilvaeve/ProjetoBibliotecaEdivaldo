@@ -5,9 +5,8 @@
  */
 package ViewPrincipal;
 
-
-import Controller.LivroController;
-import Model.Livro;
+import Controller.SistemaController;
+import Model.Pessoa;
 import java.util.ArrayList;
 import javax.swing.table.DefaultTableModel;
 
@@ -15,23 +14,18 @@ import javax.swing.table.DefaultTableModel;
  *
  * @author Edivaldo
  */
-public class PesquisaLivro extends javax.swing.JDialog {
+public class PesquisaPessoa extends javax.swing.JDialog {
 
-    private ArrayList<Livro> listaLivro;
+   private ArrayList<Pessoa> listaPessoa;
     private DefaultTableModel modelo;
-    private Livro livro;
-
-    /**
-     * Creates new form PesquisaLivro
-     */
-    public PesquisaLivro(java.awt.Frame parent, boolean modal) {
+    private Pessoa pessoa;
+    public PesquisaPessoa(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
         setModelo();
         pesquisar(0);
     }
-
-    public PesquisaLivro(int id) {
+    public PesquisaPessoa(int id) {
         pesquisar(id);
         pegaIdSelecionado(id);
     }
@@ -45,30 +39,21 @@ public class PesquisaLivro extends javax.swing.JDialog {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jLabel1 = new javax.swing.JLabel();
-        txtPesquisa = new javax.swing.JTextField();
-        btnPesquisar = new javax.swing.JButton();
+        txtPesquisaAluno = new javax.swing.JTextField();
         jScrollPane1 = new javax.swing.JScrollPane();
-        tblGenero = new javax.swing.JTable();
+        tblPesquisaAluno = new javax.swing.JTable();
+        jLabel1 = new javax.swing.JLabel();
+        btnPesquisar = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
-        jLabel1.setText("Pesquisar:");
-
-        txtPesquisa.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyReleased(java.awt.event.KeyEvent evt) {
-                txtPesquisaKeyReleased(evt);
-            }
-        });
-
-        btnPesquisar.setText("Pesquisar");
-        btnPesquisar.addActionListener(new java.awt.event.ActionListener() {
+        txtPesquisaAluno.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnPesquisarActionPerformed(evt);
+                txtPesquisaAlunoActionPerformed(evt);
             }
         });
 
-        tblGenero.setModel(new javax.swing.table.DefaultTableModel(
+        tblPesquisaAluno.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null},
                 {null, null, null, null},
@@ -79,12 +64,21 @@ public class PesquisaLivro extends javax.swing.JDialog {
                 "Title 1", "Title 2", "Title 3", "Title 4"
             }
         ));
-        tblGenero.addMouseListener(new java.awt.event.MouseAdapter() {
+        tblPesquisaAluno.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                tblGeneroMouseClicked(evt);
+                tblPesquisaAlunoMouseClicked(evt);
             }
         });
-        jScrollPane1.setViewportView(tblGenero);
+        jScrollPane1.setViewportView(tblPesquisaAluno);
+
+        jLabel1.setText("Pesquisar");
+
+        btnPesquisar.setText("Pesquisar");
+        btnPesquisar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnPesquisarActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -94,38 +88,38 @@ public class PesquisaLivro extends javax.swing.JDialog {
                 .addContainerGap()
                 .addComponent(jLabel1)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(txtPesquisa, javax.swing.GroupLayout.PREFERRED_SIZE, 245, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(txtPesquisaAluno, javax.swing.GroupLayout.PREFERRED_SIZE, 249, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(btnPesquisar)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
+            .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
+                .addGap(35, 35, 35)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel1)
-                    .addComponent(txtPesquisa, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txtPesquisaAluno, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btnPesquisar))
                 .addGap(18, 18, 18)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 248, Short.MAX_VALUE))
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 224, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void txtPesquisaKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtPesquisaKeyReleased
+    private void txtPesquisaAlunoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtPesquisaAlunoActionPerformed
         pesquisar(0);
-    }//GEN-LAST:event_txtPesquisaKeyReleased
+    }//GEN-LAST:event_txtPesquisaAlunoActionPerformed
+
+    private void tblPesquisaAlunoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblPesquisaAlunoMouseClicked
+        pegaIdSelecionado(0);
+    }//GEN-LAST:event_tblPesquisaAlunoMouseClicked
 
     private void btnPesquisarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPesquisarActionPerformed
         pesquisar(0);
     }//GEN-LAST:event_btnPesquisarActionPerformed
-
-    private void tblGeneroMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblGeneroMouseClicked
-        pegaIdSelecionado(0);
-    }//GEN-LAST:event_tblGeneroMouseClicked
 
     /**
      * @param args the command line arguments
@@ -144,20 +138,21 @@ public class PesquisaLivro extends javax.swing.JDialog {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(PesquisaLivro.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(PesquisaPessoa.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(PesquisaLivro.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(PesquisaPessoa.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(PesquisaLivro.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(PesquisaPessoa.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(PesquisaLivro.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(PesquisaPessoa.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
         //</editor-fold>
 
         /* Create and display the dialog */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                PesquisaLivro dialog = new PesquisaLivro(new javax.swing.JFrame(), true);
+                PesquisaPessoa dialog = new PesquisaPessoa(new javax.swing.JFrame(), true);
                 dialog.addWindowListener(new java.awt.event.WindowAdapter() {
                     @Override
                     public void windowClosing(java.awt.event.WindowEvent e) {
@@ -173,53 +168,67 @@ public class PesquisaLivro extends javax.swing.JDialog {
     private javax.swing.JButton btnPesquisar;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTable tblGenero;
-    private javax.swing.JTextField txtPesquisa;
+    private javax.swing.JTable tblPesquisaAluno;
+    private javax.swing.JTextField txtPesquisaAluno;
     // End of variables declaration//GEN-END:variables
  private void pesquisar(int id) {
-        ArrayList<Livro> lista;
+        ArrayList<Pessoa> lista;
         if (id == 0) {
-            lista = new LivroController().getLivroByNome(txtPesquisa.getText());
+            lista = new SistemaController().getPessoaByNome(txtPesquisaAluno.getText());
             setModelo();
-            for (Livro livro : lista) {
-                insereTabela(livro);
+            for (Pessoa pessoa : lista) {
+                insereTabela(pessoa);
             }
         } else {
-            lista = new LivroController().getLivroByNome("");
+            lista = new SistemaController().getPessoaByNome("");
         }
-        listaLivro = lista;
+        listaPessoa = lista;
     }
 
-    public void insereTabela(Livro livro) {
+    public void insereTabela(Pessoa pessoa) {
         Object[] linha = new Object[9];
-        linha[0] = livro.getIdLivro();
-        linha[1] = livro.getTitulo();
+        linha[0] = pessoa.getIdpessoa();
+        linha[1] = pessoa.getNome();
+        linha[2] = pessoa.getCpf();
+        linha[3] = pessoa.getRg();
+        linha[4] = pessoa.getSexo();
+        linha[5] = pessoa.getDatanascimento();
+        linha[6] = pessoa.getFone();
+        linha[7] = pessoa.getEndereco();
+        linha[8] = pessoa.getDatacadastro();
+
         modelo.addRow(linha);
     }
 
     private void setModelo() {
         modelo = new DefaultTableModel();
-        modelo.addColumn("IDLivro");
-        modelo.addColumn("Titulo");
-        tblGenero.setModel(modelo);
+        modelo.addColumn("IDPESSOA");
+        modelo.addColumn("NOME");
+        modelo.addColumn("CPF");
+        modelo.addColumn("RG");
+        modelo.addColumn("SEXO");
+        modelo.addColumn("DATANASCIMENTO");
+        modelo.addColumn("FONE");
+        modelo.addColumn("ENDERECO");
+        modelo.addColumn("DATACADASTRO");
+        tblPesquisaAluno.setModel(modelo);
     }
 
     private void pegaIdSelecionado(int id) {
 
         if (id == 0) {
-            int linha = tblGenero.getSelectedRow();
+            int linha = tblPesquisaAluno.getSelectedRow();
             id = Integer.parseInt(modelo.getValueAt(linha, 0).toString());
         }
-        for (Livro livro : listaLivro) {
-            if (id == livro.getIdLivro()) {
-                this.livro = livro;
+        for (Pessoa pessoa : listaPessoa) {
+            if (id == pessoa.getIdpessoa()) {
+                this.pessoa = pessoa;
             }
         }
         this.dispose();
     }
 
-    public Livro getLivroSelecionado() {
-        return livro;
+    public Pessoa getPessoaSelecionado() {
+        return pessoa;
     }
-
 }

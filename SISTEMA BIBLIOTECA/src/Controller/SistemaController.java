@@ -42,7 +42,7 @@ public class SistemaController {
         return sistemadao.getPessoas();
     }
    
-  public ArrayList<Pessoa> getPesquisar(String nome){
+ public ArrayList<Pessoa> getPessoaByNome(String nome){
        return sistemadao.getPesquisar(nome);
    }
 }

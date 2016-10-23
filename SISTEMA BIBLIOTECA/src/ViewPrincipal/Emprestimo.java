@@ -5,10 +5,16 @@
  */
 package ViewPrincipal;
 
+import Controller.EmprestimoController;
+import Model.Emprestimos;
 import Model.Livro;
+import Model.Pessoa;
+
 import java.awt.Dimension;
 import java.awt.Point;
 import java.awt.Toolkit;
+import java.util.ArrayList;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -16,11 +22,15 @@ import java.awt.Toolkit;
  */
 public class Emprestimo extends javax.swing.JInternalFrame {
 
+    Emprestimos emprestimo;
+    EmprestimoController emprestimoController;
+
     /**
      * Creates new form Emprestimo
      */
     public Emprestimo() {
         initComponents();
+        emprestimoController = new EmprestimoController();
         Dimension tamTela = Toolkit.getDefaultToolkit().getScreenSize();
         Dimension tamJan = getSize();
         setLocation(new Point((tamTela.width - tamJan.width) / 2, (tamTela.height - tamJan.height) / 2));
@@ -38,19 +48,20 @@ public class Emprestimo extends javax.swing.JInternalFrame {
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
-        jTextField1 = new javax.swing.JTextField();
-        jFormattedTextField1 = new javax.swing.JFormattedTextField();
-        jFormattedTextField2 = new javax.swing.JFormattedTextField();
+        txtIdEmprestimo = new javax.swing.JTextField();
+        txtDataEmprestimo = new javax.swing.JFormattedTextField();
+        txtDataDevolucao = new javax.swing.JFormattedTextField();
         jButton1 = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
         jButton3 = new javax.swing.JButton();
         jButton4 = new javax.swing.JButton();
         jLabel4 = new javax.swing.JLabel();
         txtIDLivro = new javax.swing.JTextField();
-        jTextField3 = new javax.swing.JTextField();
+        txtAluno = new javax.swing.JTextField();
         jButton5 = new javax.swing.JButton();
         jLabel5 = new javax.swing.JLabel();
         lblNomeLivro = new javax.swing.JLabel();
+        lblNomeAluno = new javax.swing.JLabel();
 
         setClosable(true);
         setMaximizable(true);
@@ -62,6 +73,11 @@ public class Emprestimo extends javax.swing.JInternalFrame {
         jLabel3.setText("Data Devolução");
 
         jButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/Save-icon.png"))); // NOI18N
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
 
         jButton2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/Limpeza.png"))); // NOI18N
 
@@ -82,6 +98,12 @@ public class Emprestimo extends javax.swing.JInternalFrame {
             }
         });
 
+        txtAluno.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                txtAlunoKeyPressed(evt);
+            }
+        });
+
         jButton5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/pesquisar.png"))); // NOI18N
         jButton5.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -91,7 +113,9 @@ public class Emprestimo extends javax.swing.JInternalFrame {
 
         jLabel5.setText("Aluno");
 
-        lblNomeLivro.setText("jLabel6");
+        lblNomeLivro.setText("Nome Livro");
+
+        lblNomeAluno.setText("Nome Aluno");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -100,9 +124,8 @@ public class Emprestimo extends javax.swing.JInternalFrame {
             .addGroup(layout.createSequentialGroup()
                 .addGap(19, 19, 19)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel5)
                     .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel4)
                             .addGroup(layout.createSequentialGroup()
                                 .addComponent(jButton1)
@@ -110,35 +133,45 @@ public class Emprestimo extends javax.swing.JInternalFrame {
                                 .addComponent(jButton2)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                 .addComponent(jButton3))
-                            .addComponent(jTextField3)
                             .addGroup(layout.createSequentialGroup()
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                                    .addComponent(txtAluno, javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(txtIDLivro, javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(jLabel1, javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jTextField1, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 73, Short.MAX_VALUE))
-                                .addGap(18, 18, 18)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                    .addComponent(txtIdEmprestimo, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 73, Short.MAX_VALUE))
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addGroup(layout.createSequentialGroup()
+                                        .addGap(18, 18, 18)
                                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                                             .addComponent(jLabel2)
-                                            .addComponent(jFormattedTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 123, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                            .addComponent(txtDataEmprestimo, javax.swing.GroupLayout.PREFERRED_SIZE, 123, javax.swing.GroupLayout.PREFERRED_SIZE))
                                         .addGap(18, 18, 18)
                                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                            .addComponent(jFormattedTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, 123, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                            .addComponent(txtDataDevolucao, javax.swing.GroupLayout.PREFERRED_SIZE, 123, javax.swing.GroupLayout.PREFERRED_SIZE)
                                             .addComponent(jLabel3)))
                                     .addGroup(layout.createSequentialGroup()
-                                        .addComponent(jButton4, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addGap(18, 18, 18)
-                                        .addComponent(lblNomeLivro, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))))
-                        .addGap(1, 1, 1)
-                        .addComponent(jButton5, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(100, Short.MAX_VALUE))
+                                        .addGap(1, 1, 1)
+                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                            .addGroup(layout.createSequentialGroup()
+                                                .addComponent(jButton5, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                                .addComponent(lblNomeAluno)
+                                                .addGap(0, 0, Short.MAX_VALUE))
+                                            .addGroup(layout.createSequentialGroup()
+                                                .addComponent(jButton4, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                                .addComponent(lblNomeLivro, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))))))
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jLabel5)
+                        .addContainerGap(462, Short.MAX_VALUE))))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+            .addGroup(layout.createSequentialGroup()
                 .addGap(8, 8, 8)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(lblNomeAluno)
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jButton2, javax.swing.GroupLayout.Alignment.TRAILING)
@@ -150,31 +183,29 @@ public class Emprestimo extends javax.swing.JInternalFrame {
                                 .addComponent(jLabel1)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jFormattedTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                    .addComponent(txtDataEmprestimo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(txtIdEmprestimo, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)))
                             .addGroup(layout.createSequentialGroup()
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                                     .addComponent(jLabel2)
                                     .addComponent(jLabel3))
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jFormattedTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                .addComponent(txtDataDevolucao, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                         .addGap(18, 18, 18)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createSequentialGroup()
                                 .addComponent(jLabel4)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(txtIDLivro, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addComponent(lblNomeLivro, javax.swing.GroupLayout.Alignment.TRAILING)))
-                    .addComponent(jButton4, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
-                .addComponent(jLabel5)
-                .addGap(3, 3, 3)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jTextField3)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(0, 0, Short.MAX_VALUE)
-                        .addComponent(jButton5, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addGap(44, 44, 44))
+                            .addComponent(jButton4, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(lblNomeLivro, javax.swing.GroupLayout.Alignment.TRAILING))
+                        .addGap(18, 18, 18)
+                        .addComponent(jLabel5)
+                        .addGap(3, 3, 3)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(txtAluno, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jButton5, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                .addContainerGap(52, Short.MAX_VALUE))
         );
 
         pack();
@@ -188,7 +219,7 @@ public class Emprestimo extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_jButton4ActionPerformed
 
     private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
-        // TODO add your handling code here:
+        pesquisaPessoa();
     }//GEN-LAST:event_jButton5ActionPerformed
 
     private void txtIDLivroKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtIDLivroKeyPressed
@@ -199,6 +230,16 @@ public class Emprestimo extends javax.swing.JInternalFrame {
 
     }//GEN-LAST:event_txtIDLivroKeyPressed
 
+    private void txtAlunoKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtAlunoKeyPressed
+        if (evt.getKeyCode() == 10) {
+            pesquisaPessoa();
+        }
+    }//GEN-LAST:event_txtAlunoKeyPressed
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        addEmprestimo();
+    }//GEN-LAST:event_jButton1ActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;
@@ -206,39 +247,92 @@ public class Emprestimo extends javax.swing.JInternalFrame {
     private javax.swing.JButton jButton3;
     private javax.swing.JButton jButton4;
     private javax.swing.JButton jButton5;
-    private javax.swing.JFormattedTextField jFormattedTextField1;
-    private javax.swing.JFormattedTextField jFormattedTextField2;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
-    private javax.swing.JTextField jTextField1;
-    private javax.swing.JTextField jTextField3;
+    private javax.swing.JLabel lblNomeAluno;
     private javax.swing.JLabel lblNomeLivro;
+    private javax.swing.JTextField txtAluno;
+    private javax.swing.JFormattedTextField txtDataDevolucao;
+    private javax.swing.JFormattedTextField txtDataEmprestimo;
     private javax.swing.JTextField txtIDLivro;
+    private javax.swing.JTextField txtIdEmprestimo;
     // End of variables declaration//GEN-END:variables
 
     private void pesquisaLivro() {
         PesquisaLivro pesquisa;
         int id;
-        try{
+        try {
             id = Integer.parseInt(txtIDLivro.getText());
-        }catch(Exception ex){
+        } catch (Exception ex) {
             id = 0;
         }
-        
-        
-        
-        if (id ==0) {
+
+        if (id == 0) {
             pesquisa = new PesquisaLivro(null, closable);
             pesquisa.setVisible(true);
-        }else{
+        } else {
             pesquisa = new PesquisaLivro(id);
         }
         Livro livro = pesquisa.getLivroSelecionado();
         txtIDLivro.setText(livro.getIdLivro() + "");
         lblNomeLivro.setText(livro.getTitulo());
+
+    }
+
+    private void pesquisaPessoa() {
+        PesquisaPessoa pesquisaPessoa;
+        int id;
+        try {
+            id = Integer.parseInt(txtAluno.getText());
+        } catch (Exception ex) {
+            id = 0;
+        }
+
+        if (id == 0) {
+            pesquisaPessoa = new PesquisaPessoa(null, closable);
+            pesquisaPessoa.setVisible(true);
+        } else {
+            pesquisaPessoa = new PesquisaPessoa(id);
+        }
+        Pessoa pessoa = pesquisaPessoa.getPessoaSelecionado();
+        txtAluno.setText(pessoa.getIdpessoa() + "");
+        lblNomeAluno.setText(pessoa.getNome());
+
+    }
+
+    public void addEmprestimo() {
+       /* if (txtIdEmprestimo.getText().equals("")) {
+            JOptionPane.showMessageDialog(null, "Campa nome invalido");
+        }*/
+        if (emprestimo == null) {
+            emprestimo = new Emprestimos();
+        }
+        emprestimo.setIdEmprestimo(Integer.parseInt(txtIdEmprestimo.getText()));
+        emprestimo.setDataEmprestimo(txtDataEmprestimo.getText());
+        emprestimo.setDataEmprestimo(txtDataDevolucao.getText());
+
+        if (emprestimoController.insereEmprestimo(emprestimo)) {
+
+            limpaCampos();
+
+        }
+    }
+
+    private void limpaCampos() {
+        emprestimo = null;
+        txtIdEmprestimo.setText("");
+        txtDataEmprestimo.setText("");
+        txtDataDevolucao.setText("");
+
+    }
+
+    private void novo() {
+        txtIdEmprestimo.setEnabled(true);
+        txtDataEmprestimo.setEnabled(true);
+        txtDataDevolucao.setEnabled(true);
 
     }
 

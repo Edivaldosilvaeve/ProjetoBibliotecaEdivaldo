@@ -6,8 +6,6 @@
 package SistemaDao;
 
 import Model.Autor;
-import Model.Pessoa;
-import com.sun.org.apache.bcel.internal.generic.RETURN;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;

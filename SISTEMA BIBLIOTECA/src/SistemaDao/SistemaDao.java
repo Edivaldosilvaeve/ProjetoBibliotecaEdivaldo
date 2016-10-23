@@ -169,7 +169,7 @@ public class SistemaDao {
         Pessoa pesquisa;
         ArrayList<Pessoa> lista = new ArrayList<>();
         try {
-            rs = st.executeQuery("SELECT PESSOAID, NOME, CPF, RG, SEXO, TELEFONE, ENDERECO, DATACADASTRO FROM PESSOAS WHERE NOME like '%"+nome+"%'");
+            rs = st.executeQuery("SELECT PESSOAID, NOME, CPF, RG, SEXO, DATANASCIMENTO, TELEFONE, ENDERECO, DATACADASTRO FROM PESSOAS WHERE NOME like '%"+nome+"%'");
             while (rs.next()) {
                 pesquisa = new Pessoa();
                 pesquisa.setNome(rs.getString("NOME"));
