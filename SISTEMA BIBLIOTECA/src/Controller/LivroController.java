@@ -7,7 +7,6 @@ package Controller;
 
 import Model.Livro;
 
-
 import SistemaDao.LivroDao;
 
 import java.util.ArrayList;
@@ -17,18 +16,18 @@ import java.util.ArrayList;
  * @author Edivaldo
  */
 public class LivroController {
-     LivroDao livroDao;
 
-    public LivroController(){
+    LivroDao livroDao;
+
+    public LivroController() {
         if (livroDao == null) {
             livroDao = new LivroDao();
         }
     }
 
-   
     public boolean insereLivros(Livro livro) {
 
-        if (livro.getIdLivro()!= 0) {
+        if (livro.getIdLivro() != 0) {
 
             return livroDao.updateLivro(livro);
         } else {
@@ -36,16 +35,20 @@ public class LivroController {
         }
 
     }
+
     public ArrayList<Livro> getLivros() {
         return livroDao.getLivros();
     }
-   
- public ArrayList<Livro> getLivroByNome(String nome){
-       return livroDao.getPesquisar(nome);
-   }
-    
-     public boolean deleteLivro(int id) {
+
+    public ArrayList<Livro> getLivroByNome(String nome) {
+        return livroDao.getPesquisar(nome);
+    }
+
+    public boolean deleteLivro(int id) {
         return livroDao.deleteLivro(id);
     }
-    
+
+    public Livro getLivroByID(int id) {
+        return livroDao.getLivroByID(id);
+    }
 }

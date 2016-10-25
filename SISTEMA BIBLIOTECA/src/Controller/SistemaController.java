@@ -45,4 +45,7 @@ public class SistemaController {
  public ArrayList<Pessoa> getPessoaByNome(String nome){
        return sistemadao.getPesquisar(nome);
    }
+   public boolean deletePessoa(int id) {
+        return sistemadao.deletePessoa(id);
+    }
 }

@@ -19,21 +19,24 @@ import javax.swing.table.DefaultTableModel;
  * @author EDIVALDOS4342_00
  */
 public class CadastroPessoa extends javax.swing.JInternalFrame {
-Pessoa pessoa;
+
+    Pessoa pessoa;
     SistemaController sistemaController;
     ArrayList<Pessoa> listaPessoa;
     ArrayList<Pessoa> pesquisa;
+
     /**
      * Creates new form CadastroPessoa
      */
     public CadastroPessoa() {
         initComponents();
-        setModelo();        
+        setModelo();
         sistemaController = new SistemaController();
         Dimension tamTela = Toolkit.getDefaultToolkit().getScreenSize();
         Dimension tamJan = getSize();
         setLocation(new Point((tamTela.width - tamJan.width) / 2, (tamTela.height - tamJan.height) / 2));
         listaPessoa();
+
     }
 
     /**
@@ -129,6 +132,11 @@ Pessoa pessoa;
         txtIdPessoa.setEditable(false);
 
         txtCPF.setEnabled(false);
+        txtCPF.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                txtCPFKeyPressed(evt);
+            }
+        });
 
         txtSexo.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "MASCULINO", "FEMININO", " " }));
         txtSexo.addActionListener(new java.awt.event.ActionListener() {
@@ -136,14 +144,39 @@ Pessoa pessoa;
                 txtSexoActionPerformed(evt);
             }
         });
+        txtSexo.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                txtSexoKeyPressed(evt);
+            }
+        });
 
         txtDataNascimento.setEnabled(false);
+        txtDataNascimento.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                txtDataNascimentoKeyPressed(evt);
+            }
+        });
 
         txtFone.setEnabled(false);
+        txtFone.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                txtFoneKeyPressed(evt);
+            }
+        });
 
         txtRG.setEnabled(false);
+        txtRG.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                txtRGKeyPressed(evt);
+            }
+        });
 
         txtEndereco.setEnabled(false);
+        txtEndereco.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                txtEnderecoKeyPressed(evt);
+            }
+        });
 
         txtDataCadastro.setEnabled(false);
 
@@ -158,9 +191,22 @@ Pessoa pessoa;
                 "Title 1", "Title 2", "Title 3", "Title 4"
             }
         ));
+        tblPessoa.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                tblPessoaMouseClicked(evt);
+            }
+        });
         jScrollPane3.setViewportView(tblPessoa);
 
         btnNovo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/AUsuario.png"))); // NOI18N
+        btnNovo.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btnNovoMouseClicked(evt);
+            }
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                btnNovoMousePressed(evt);
+            }
+        });
         btnNovo.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnNovoActionPerformed(evt);
@@ -168,10 +214,20 @@ Pessoa pessoa;
         });
 
         btnExcluir.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/Excluir Usuario.png"))); // NOI18N
+        btnExcluir.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnExcluirActionPerformed(evt);
+            }
+        });
 
         btnEditar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/Editar.png"))); // NOI18N
 
         btnLimpar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/Limpeza.png"))); // NOI18N
+        btnLimpar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnLimparActionPerformed(evt);
+            }
+        });
 
         btnGravar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/Save-icon.png"))); // NOI18N
         btnGravar.addActionListener(new java.awt.event.ActionListener() {
@@ -181,6 +237,11 @@ Pessoa pessoa;
         });
 
         txtNome.setEnabled(false);
+        txtNome.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                txtNomeKeyPressed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -304,16 +365,84 @@ Pessoa pessoa;
     }// </editor-fold>//GEN-END:initComponents
 
     private void txtSexoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtSexoActionPerformed
-       
+
     }//GEN-LAST:event_txtSexoActionPerformed
 
     private void btnNovoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNovoActionPerformed
         novo();
+        
     }//GEN-LAST:event_btnNovoActionPerformed
 
     private void btnGravarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGravarActionPerformed
         addPessoa();
     }//GEN-LAST:event_btnGravarActionPerformed
+
+    private void btnExcluirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnExcluirActionPerformed
+        deletePessoa();
+    }//GEN-LAST:event_btnExcluirActionPerformed
+
+    private void btnLimparActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLimparActionPerformed
+        limpaCampos();
+    }//GEN-LAST:event_btnLimparActionPerformed
+
+    private void tblPessoaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblPessoaMouseClicked
+        carregaPessoa();
+    }//GEN-LAST:event_tblPessoaMouseClicked
+
+    private void txtNomeKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtNomeKeyPressed
+        if (evt.getKeyCode() == 10) {
+            txtCPF.grabFocus();
+        }
+
+    }//GEN-LAST:event_txtNomeKeyPressed
+
+    private void txtCPFKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtCPFKeyPressed
+        if (evt.getKeyCode() == 10) {
+            txtSexo.grabFocus();
+        }
+
+    }//GEN-LAST:event_txtCPFKeyPressed
+
+    private void txtSexoKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtSexoKeyPressed
+        if (evt.getKeyCode() == 10) {
+            txtRG.grabFocus();
+        }
+          
+    }//GEN-LAST:event_txtSexoKeyPressed
+
+    private void txtRGKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtRGKeyPressed
+        if (evt.getKeyCode() == 10) {
+            txtDataNascimento.grabFocus();
+        }
+    }//GEN-LAST:event_txtRGKeyPressed
+
+    private void txtDataNascimentoKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtDataNascimentoKeyPressed
+        if (evt.getKeyCode() == 10) {
+            txtFone.grabFocus();
+        }
+    }//GEN-LAST:event_txtDataNascimentoKeyPressed
+
+    private void txtFoneKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtFoneKeyPressed
+        if (evt.getKeyCode() == 10) {
+            txtEndereco.grabFocus();
+        }
+    }//GEN-LAST:event_txtFoneKeyPressed
+
+    private void txtEnderecoKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtEnderecoKeyPressed
+       if (evt.getKeyCode() == 10) {
+            txtDataCadastro.grabFocus();
+        }
+    }//GEN-LAST:event_txtEnderecoKeyPressed
+
+    private void btnNovoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnNovoMouseClicked
+       
+    }//GEN-LAST:event_btnNovoMouseClicked
+
+    private void btnNovoMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnNovoMousePressed
+         if (evt.getClickCount() == 10) {
+            txtNome.grabFocus();
+        }
+    }//GEN-LAST:event_btnNovoMousePressed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -410,6 +539,7 @@ Pessoa pessoa;
         linha[8] = pessoa.getDatacadastro();
 
         modelo.addRow(linha);
+
     }
 
     public void listaPessoa() {
@@ -471,10 +601,15 @@ Pessoa pessoa;
         txtNome.setEnabled(true);
         txtCPF.setEnabled(true);
         txtEndereco.setEnabled(true);
-        txtDataCadastro.setEnabled(true);        
+        txtDataCadastro.setEnabled(true);
         txtRG.setEnabled(true);
         txtDataNascimento.setEnabled(true);
         txtFone.setEnabled(true);
         btnEditar.setEnabled(true);
+    }
+
+    private void deletePessoa() {
+        sistemaController.deletePessoa(pegaIdSelecionado());
+        listaPessoa();
     }
 }

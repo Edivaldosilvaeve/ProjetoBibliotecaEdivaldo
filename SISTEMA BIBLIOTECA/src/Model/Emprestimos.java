@@ -14,6 +14,25 @@ public class Emprestimos {
     private int idEmprestimo;
     private String dataEmprestimo;
     private String dataDevolucao;
+    private int idLivro;
+    private int idAluno;
+
+    public int getIdLivro() {
+        return idLivro;
+    }
+
+    public void setIdLivro(int idLivro) {
+        this.idLivro = idLivro;
+    }
+
+    public int getIdAluno() {
+        return idAluno;
+    }
+
+    public void setIdAluno(int idAluno) {
+        this.idAluno = idAluno;
+    }
+    
 
     public int getIdEmprestimo() {
         return idEmprestimo;

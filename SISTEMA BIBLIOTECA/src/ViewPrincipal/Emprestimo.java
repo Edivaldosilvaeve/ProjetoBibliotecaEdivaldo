@@ -57,11 +57,12 @@ public class Emprestimo extends javax.swing.JInternalFrame {
         jButton4 = new javax.swing.JButton();
         jLabel4 = new javax.swing.JLabel();
         txtIDLivro = new javax.swing.JTextField();
-        txtAluno = new javax.swing.JTextField();
+        txtIdAluno = new javax.swing.JTextField();
         jButton5 = new javax.swing.JButton();
         jLabel5 = new javax.swing.JLabel();
         lblNomeLivro = new javax.swing.JLabel();
         lblNomeAluno = new javax.swing.JLabel();
+        jButton6 = new javax.swing.JButton();
 
         setClosable(true);
         setMaximizable(true);
@@ -98,9 +99,9 @@ public class Emprestimo extends javax.swing.JInternalFrame {
             }
         });
 
-        txtAluno.addKeyListener(new java.awt.event.KeyAdapter() {
+        txtIdAluno.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
-                txtAlunoKeyPressed(evt);
+                txtIdAlunoKeyPressed(evt);
             }
         });
 
@@ -117,6 +118,13 @@ public class Emprestimo extends javax.swing.JInternalFrame {
 
         lblNomeAluno.setText("Nome Aluno");
 
+        jButton6.setText("jButton6");
+        jButton6.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton6ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -126,16 +134,9 @@ public class Emprestimo extends javax.swing.JInternalFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel4)
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(jButton1)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jButton2)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(jButton3))
                             .addGroup(layout.createSequentialGroup()
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                                    .addComponent(txtAluno, javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(txtIdAluno, javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(txtIDLivro, javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(jLabel1, javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(txtIdEmprestimo, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 73, Short.MAX_VALUE))
@@ -160,7 +161,19 @@ public class Emprestimo extends javax.swing.JInternalFrame {
                                             .addGroup(layout.createSequentialGroup()
                                                 .addComponent(jButton4, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
                                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                                .addComponent(lblNomeLivro, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))))))
+                                                .addComponent(lblNomeLivro, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))))
+                            .addGroup(layout.createSequentialGroup()
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jLabel4)
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addComponent(jButton1)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addComponent(jButton2)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                        .addComponent(jButton3)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addComponent(jButton6)))
+                                .addGap(0, 0, Short.MAX_VALUE)))
                         .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jLabel5)
@@ -176,7 +189,8 @@ public class Emprestimo extends javax.swing.JInternalFrame {
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jButton2, javax.swing.GroupLayout.Alignment.TRAILING)
                             .addComponent(jButton3, javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jButton6, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(18, 18, 18)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addGroup(layout.createSequentialGroup()
@@ -203,9 +217,9 @@ public class Emprestimo extends javax.swing.JInternalFrame {
                         .addComponent(jLabel5)
                         .addGap(3, 3, 3)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(txtAluno, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(txtIdAluno, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jButton5, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                .addContainerGap(52, Short.MAX_VALUE))
+                .addContainerGap(56, Short.MAX_VALUE))
         );
 
         pack();
@@ -230,15 +244,19 @@ public class Emprestimo extends javax.swing.JInternalFrame {
 
     }//GEN-LAST:event_txtIDLivroKeyPressed
 
-    private void txtAlunoKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtAlunoKeyPressed
+    private void txtIdAlunoKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtIdAlunoKeyPressed
         if (evt.getKeyCode() == 10) {
             pesquisaPessoa();
         }
-    }//GEN-LAST:event_txtAlunoKeyPressed
+    }//GEN-LAST:event_txtIdAlunoKeyPressed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         addEmprestimo();
     }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void jButton6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton6ActionPerformed
+        pesquisaPessoa();
+    }//GEN-LAST:event_jButton6ActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -247,6 +265,7 @@ public class Emprestimo extends javax.swing.JInternalFrame {
     private javax.swing.JButton jButton3;
     private javax.swing.JButton jButton4;
     private javax.swing.JButton jButton5;
+    private javax.swing.JButton jButton6;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
@@ -254,10 +273,10 @@ public class Emprestimo extends javax.swing.JInternalFrame {
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel lblNomeAluno;
     private javax.swing.JLabel lblNomeLivro;
-    private javax.swing.JTextField txtAluno;
     private javax.swing.JFormattedTextField txtDataDevolucao;
     private javax.swing.JFormattedTextField txtDataEmprestimo;
     private javax.swing.JTextField txtIDLivro;
+    private javax.swing.JTextField txtIdAluno;
     private javax.swing.JTextField txtIdEmprestimo;
     // End of variables declaration//GEN-END:variables
 
@@ -279,14 +298,15 @@ public class Emprestimo extends javax.swing.JInternalFrame {
         Livro livro = pesquisa.getLivroSelecionado();
         txtIDLivro.setText(livro.getIdLivro() + "");
         lblNomeLivro.setText(livro.getTitulo());
-
     }
+    
+   
 
     private void pesquisaPessoa() {
         PesquisaPessoa pesquisaPessoa;
         int id;
         try {
-            id = Integer.parseInt(txtAluno.getText());
+            id = Integer.parseInt(txtIdAluno.getText());
         } catch (Exception ex) {
             id = 0;
         }
@@ -298,21 +318,21 @@ public class Emprestimo extends javax.swing.JInternalFrame {
             pesquisaPessoa = new PesquisaPessoa(id);
         }
         Pessoa pessoa = pesquisaPessoa.getPessoaSelecionado();
-        txtAluno.setText(pessoa.getIdpessoa() + "");
+        txtIdAluno.setText(pessoa.getIdpessoa() + "");
         lblNomeAluno.setText(pessoa.getNome());
 
     }
 
     public void addEmprestimo() {
-       /* if (txtIdEmprestimo.getText().equals("")) {
-            JOptionPane.showMessageDialog(null, "Campa nome invalido");
-        }*/
+       
         if (emprestimo == null) {
             emprestimo = new Emprestimos();
         }
-        emprestimo.setIdEmprestimo(Integer.parseInt(txtIdEmprestimo.getText()));
+       // emprestimo.setIdEmprestimo(Integer.parseInt(txtIdEmprestimo.getText()));
         emprestimo.setDataEmprestimo(txtDataEmprestimo.getText());
-        emprestimo.setDataEmprestimo(txtDataDevolucao.getText());
+        emprestimo.setDataDevolucao(txtDataDevolucao.getText());
+        emprestimo.setIdAluno(Integer.parseInt(txtIdAluno.getText()));
+        emprestimo.setIdLivro(Integer.parseInt(txtIDLivro.getText()));
 
         if (emprestimoController.insereEmprestimo(emprestimo)) {
 

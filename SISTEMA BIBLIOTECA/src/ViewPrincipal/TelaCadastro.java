@@ -208,7 +208,7 @@ public class TelaCadastro extends javax.swing.JFrame {
     }//GEN-LAST:event_jMenuItem4ActionPerformed
 
     private void jMenuItem6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem6ActionPerformed
-         Emprestimo emprestimo = new Emprestimo();
+         Emprestimo1 emprestimo = new Emprestimo1();
         this.add(emprestimo);
         jDesktopPane1.add(emprestimo);
         emprestimo.setVisible(true);

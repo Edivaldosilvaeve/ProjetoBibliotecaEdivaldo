@@ -188,5 +188,17 @@ public class SistemaDao {
         }
         return lista;
     }
+    
+    public boolean deletePessoa(int id) {
+        String sql = "DELETE FROM PESSOAS WHERE PESSOAID = " + id;
+        try {
+            st.execute(sql);
+            return true;
+        } catch (SQLException ex) {
+            JOptionPane.showMessageDialog(null, "Erro delete");
+        }
+
+        return false;
+    }
 
 }

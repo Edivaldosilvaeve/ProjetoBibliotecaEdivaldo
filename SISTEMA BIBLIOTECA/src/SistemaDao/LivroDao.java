@@ -68,7 +68,7 @@ public class LivroDao {
                     + "  ,  '" + livro.getIdGenero()
                     + "' , '" + livro.getIdAutor()
                     + "' , '" + livro.getIdEditora()
-                    + "' , '" + livro.getTitulo()                    
+                    + "' , '" + livro.getTitulo()
                     + "')";
             System.out.println(sql);
             st.execute(sql);
@@ -93,8 +93,8 @@ public class LivroDao {
                 livros.setIdGenero(rs.getInt("IDGENERO"));
                 livros.setIdAutor(rs.getInt("IDAUTOR"));
                 livros.setIdEditora(rs.getInt("IDEDITORA"));
-                livros.setTitulo(rs.getString("TITULO"));                
-                
+                livros.setTitulo(rs.getString("TITULO"));
+
                 lista.add(livros);
             }
         } catch (SQLException ex) {
@@ -106,12 +106,12 @@ public class LivroDao {
     public boolean updateLivro(Livro livro) {
         Date data = new Date();
         String sql = "UPDATE livros SET "
-                + "idlivro=" + livro.getIdLivro()+ ","
-                + "idgenero=" + livro.getIdGenero()+ ", "
-                + "idautor=" + livro.getIdAutor()+ ","
-                + "ideditora=" + livro.getIdEditora()+ ","
-                + "titulo='" + livro.getTitulo()+ "',"               
-                + " WHERE idlivro=" + livro.getIdLivro()+ ",";
+                + "idlivro=" + livro.getIdLivro() + ","
+                + "idgenero=" + livro.getIdGenero() + ", "
+                + "idautor=" + livro.getIdAutor() + ","
+                + "ideditora=" + livro.getIdEditora() + ","
+                + "titulo='" + livro.getTitulo() + "',"
+                + " WHERE idlivro=" + livro.getIdLivro() + ",";
         try {
             st.executeUpdate(sql);
             return true;
@@ -119,7 +119,8 @@ public class LivroDao {
             JOptionPane.showMessageDialog(null, "Erro de Update" + ex + "\n" + sql);
         }
         return false;
-    }   
+    }
+
     public boolean deleteLivro(int id) {
         String sql = "DELETE FROM LIVROS WHERE IDLIVRO = " + id;
         try {
@@ -132,20 +133,20 @@ public class LivroDao {
         return false;
     }
 
-     public ArrayList<Livro> getPesquisar(String nome) {
+    public ArrayList<Livro> getPesquisar(String nome) {
         ResultSet rs;
         Livro livros;
         ArrayList<Livro> lista = new ArrayList<>();
         try {
-            rs = st.executeQuery("SELECT IDLIVRO, IDGENERO, IDAUTOR, IDEDITORA, TITULO FROM LIVROS   WHERE LOWER(TITULO) LIKE LOWER('%"+nome+"%')");
+            rs = st.executeQuery("SELECT IDLIVRO, IDGENERO, IDAUTOR, IDEDITORA, TITULO FROM LIVROS   WHERE LOWER(TITULO) LIKE LOWER('%" + nome + "%')");
             while (rs.next()) {
                 livros = new Livro();
                 livros.setIdLivro(rs.getInt("IDLIVRO"));
                 livros.setIdGenero(rs.getInt("IDGENERO"));
                 livros.setIdAutor(rs.getInt("IDAUTOR"));
                 livros.setIdEditora(rs.getInt("IDEDITORA"));
-                livros.setTitulo(rs.getString("TITULO"));                
-                
+                livros.setTitulo(rs.getString("TITULO"));
+
                 lista.add(livros);
             }
         } catch (SQLException ex) {
@@ -153,5 +154,26 @@ public class LivroDao {
         }
         return lista;
     }
-    
+
+    public Livro getLivroByID(int id) {
+        ResultSet rs;
+        Livro livros;
+
+        try {
+            rs = st.executeQuery("SELECT IDLIVRO, IDGENERO, IDAUTOR, IDEDITORA, TITULO FROM LIVROS where idlivro = " + id);
+            while (rs.next()) {
+                livros = new Livro();
+                livros.setIdLivro(rs.getInt("IDLIVRO"));
+                livros.setIdGenero(rs.getInt("IDGENERO"));
+                livros.setIdAutor(rs.getInt("IDAUTOR"));
+                livros.setIdEditora(rs.getInt("IDEDITORA"));
+                livros.setTitulo(rs.getString("TITULO"));
+                return livros;
+
+            }
+        } catch (SQLException ex) {
+            System.out.println("Erro de consulta" + ex);
+        }
+        return null;
+    }
 }
