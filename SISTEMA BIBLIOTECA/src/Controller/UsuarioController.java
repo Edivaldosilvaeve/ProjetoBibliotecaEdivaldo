@@ -5,8 +5,10 @@
  */
 package Controller;
 
+import Model.Pessoa;
 import Model.Usuario;
 import SistemaDao.UsuarioDao;
+import java.util.ArrayList;
 
 /**
  *
@@ -35,5 +37,10 @@ public class UsuarioController {
         }
 
     }
-    
+      public ArrayList<Usuario> getUsuario() {
+        return usuariodao.getUsuario();
+    }
+    public boolean deleteUsuario(int id) {
+        return usuariodao.deleteUsuario(id);
+    }
 }

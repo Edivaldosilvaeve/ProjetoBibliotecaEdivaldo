@@ -112,6 +112,40 @@ public class GeneroDao {
         }
         return lista;
     }
+     
+     public ArrayList<Genero> getGenero() {
+        ResultSet rs;
+        Genero genero;
+
+        ArrayList<Genero> lista = new ArrayList<>();
+
+        try {
+            rs = st.executeQuery("SELECT  IDGENERO, GENERO FROM GENEROS");
+            while (rs.next()) {
+                genero = new Genero();
+                genero.setIdGenero(rs.getInt("IDGENERO"));
+                genero.setGenero(rs.getString("GENERO"));
+                
+                lista.add(genero);
+            }
+
+        } catch (SQLException ex) {
+            JOptionPane.showMessageDialog(null, "Erro de consulta");
+        }
+        return lista;
+    }    
+     
+      public boolean deleteGenero(int id) {
+        String sql = "DELETE FROM GENERO WHERE IDGENERO = " + id;
+        try {
+            st.execute(sql);
+            return true;
+        } catch (SQLException ex) {
+            JOptionPane.showMessageDialog(null, "Erro delete");
+        }
+
+        return false;
+    }
     
     
 }

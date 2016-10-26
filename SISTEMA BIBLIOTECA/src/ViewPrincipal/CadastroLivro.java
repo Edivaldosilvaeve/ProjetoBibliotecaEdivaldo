@@ -61,12 +61,12 @@ public class CadastroLivro extends javax.swing.JInternalFrame {
         txtTitulo = new javax.swing.JTextField();
         btnGravar = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
-        btnEditar = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
         tblLivro = new javax.swing.JTable();
 
         setClosable(true);
         setMaximizable(true);
+        setTitle("Cadastro Livro");
 
         jLabel2.setText("Titulo");
 
@@ -79,7 +79,7 @@ public class CadastroLivro extends javax.swing.JInternalFrame {
 
         jLabel3.setText("IdAutor");
 
-        txtExcluir.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/11292_32x32_1.png"))); // NOI18N
+        txtExcluir.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/Lixeira_1.png"))); // NOI18N
         txtExcluir.setToolTipText("");
         txtExcluir.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -101,8 +101,6 @@ public class CadastroLivro extends javax.swing.JInternalFrame {
         });
 
         jLabel1.setText("IdLivro");
-
-        btnEditar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/Editar.png"))); // NOI18N
 
         tblLivro.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -127,8 +125,6 @@ public class CadastroLivro extends javax.swing.JInternalFrame {
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(btnGravar)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(btnEditar)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(btnLimpar)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(txtExcluir))
@@ -151,7 +147,7 @@ public class CadastroLivro extends javax.swing.JInternalFrame {
                             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                 .addComponent(jLabel5)
                                 .addComponent(txtIdEditora, javax.swing.GroupLayout.PREFERRED_SIZE, 58, javax.swing.GroupLayout.PREFERRED_SIZE)))))
-                .addContainerGap(98, Short.MAX_VALUE))
+                .addContainerGap(133, Short.MAX_VALUE))
             .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
@@ -160,7 +156,6 @@ public class CadastroLivro extends javax.swing.JInternalFrame {
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnGravar, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnEditar)
                     .addComponent(btnLimpar)
                     .addComponent(txtExcluir))
                 .addGap(24, 24, 24)
@@ -181,7 +176,7 @@ public class CadastroLivro extends javax.swing.JInternalFrame {
                 .addComponent(txtTitulo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 114, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(15, Short.MAX_VALUE))
         );
 
         pack();
@@ -201,7 +196,6 @@ public class CadastroLivro extends javax.swing.JInternalFrame {
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton btnEditar;
     private javax.swing.JButton btnGravar;
     private javax.swing.JButton btnLimpar;
     private javax.swing.JLabel jLabel1;
@@ -311,7 +305,7 @@ public class CadastroLivro extends javax.swing.JInternalFrame {
         txtIdAutor.setEnabled(true);
         txtIdEditora.setEnabled(true);
         txtTitulo.setEnabled(true);        
-        btnEditar.setEnabled(true);
+        
     }
     
     private void deleteLivro() {

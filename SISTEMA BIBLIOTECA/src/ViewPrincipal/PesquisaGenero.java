@@ -19,6 +19,7 @@ public class PesquisaGenero extends javax.swing.JDialog {
     private ArrayList<Genero> listaGenero;
     private DefaultTableModel modelo;
     private Genero genero;
+    GeneroController generoController;
 
     /**
      * Creates new form PesquisaGenero
@@ -28,6 +29,7 @@ public class PesquisaGenero extends javax.swing.JDialog {
         initComponents();
         setModelo();
         pesquisar();
+        generoController = new GeneroController();
     }
 
     /**
@@ -206,10 +208,14 @@ public class PesquisaGenero extends javax.swing.JDialog {
         }
         this.dispose();
     }
+    
+   
 
     public Genero getGeneroSelecionado() {
         return genero;
-    }
+    } 
         
+    
+  
 
 }

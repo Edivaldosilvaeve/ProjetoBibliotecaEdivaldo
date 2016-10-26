@@ -26,6 +26,10 @@ public class GeneroController {
     public ArrayList<Genero> getGeneroByNome(String texto) {
         return generoDao.getGeneroByNome(texto);
     }
+    
+      public ArrayList<Genero> getGenero(String texto) {
+        return generoDao.getGenero();
+    }
 
     public boolean insereGenero(Genero genero) {
         if (genero.getIdGenero() != 0) {
@@ -36,6 +40,11 @@ public class GeneroController {
         }
 
     }
+    
+    public boolean deleteGenero(int id) {
+        return generoDao.deleteGenero(id);
+    }
+
 }
 
 

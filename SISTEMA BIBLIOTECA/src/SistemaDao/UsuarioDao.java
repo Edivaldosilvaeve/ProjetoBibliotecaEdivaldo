@@ -10,6 +10,7 @@ import Model.Usuario;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -125,4 +126,37 @@ public class UsuarioDao {
         }
         return false;
     }
+      public ArrayList<Usuario> getUsuario() {
+        ResultSet rs;
+        Usuario usuario;
+        ArrayList<Usuario> lista = new ArrayList<>();
+        try {
+            rs = st.executeQuery("SELECT IDLOGIN, IDFUNCIONARIO, IDGRUPO, DESCRICAO, SENHA FROM LOGIN");
+            while (rs.next()) {
+                usuario = new Usuario();
+                usuario.setIdlogin(rs.getInt("IDLOGIN"));
+                usuario.setIdFuncionario(rs.getInt("IDFUNCIONARIO"));
+                usuario.setIdGrupo(rs.getInt("IDGRUPO"));
+                usuario.setLogin(rs.getString("DESCRICAO"));
+                usuario.setSenha(rs.getString("SENHA"));                
+                lista.add(usuario);
+            }
+        } catch (SQLException ex) {
+            System.out.println("Erro de consulta" + ex);
+        }
+        return lista;
+    }
+    
+    public boolean deleteUsuario(int id) {
+        String sql = "DELETE FROM LOGIN WHERE IDLOGIN = " + id;
+        try {
+            st.execute(sql);
+            return true;
+        } catch (SQLException ex) {
+            JOptionPane.showMessageDialog(null, "Erro delete");
+        }
+
+        return false;
+    }
+
 }
