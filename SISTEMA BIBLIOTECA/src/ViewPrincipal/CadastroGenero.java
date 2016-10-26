@@ -60,6 +60,12 @@ public class CadastroGenero extends javax.swing.JInternalFrame {
 
         txtIdGenero.setEnabled(false);
 
+        txtGenero.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtGeneroActionPerformed(evt);
+            }
+        });
+
         jButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/Save-icon.png"))); // NOI18N
         jButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -151,6 +157,10 @@ public class CadastroGenero extends javax.swing.JInternalFrame {
         deleteGenero();
     }//GEN-LAST:event_jButton3ActionPerformed
 
+    private void txtGeneroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtGeneroActionPerformed
+        addGenero();
+    }//GEN-LAST:event_txtGeneroActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnPesquisar;
@@ -174,7 +184,7 @@ public class CadastroGenero extends javax.swing.JInternalFrame {
         genero.setGenero(txtGenero.getText());
 
         if (generoController.insereGenero(genero)) {
-            JOptionPane.showMessageDialog(null, "Usuario Gravado com Sucesso");
+            JOptionPane.showMessageDialog(null, "Genero Gravado com Sucesso");
             //listaUsuario();
             // insereTabela(pessoa);
             limpaCampos();

@@ -93,6 +93,30 @@ public class CadastroLivro extends javax.swing.JInternalFrame {
 
         txtIdLivro.setEnabled(false);
 
+        txtIdGenero.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txtIdGeneroKeyTyped(evt);
+            }
+        });
+
+        txtIdAutor.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txtIdAutorKeyTyped(evt);
+            }
+        });
+
+        txtIdEditora.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txtIdEditoraKeyTyped(evt);
+            }
+        });
+
+        txtTitulo.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtTituloActionPerformed(evt);
+            }
+        });
+
         btnGravar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/Save-icon.png"))); // NOI18N
         btnGravar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -147,17 +171,17 @@ public class CadastroLivro extends javax.swing.JInternalFrame {
                             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                 .addComponent(jLabel5)
                                 .addComponent(txtIdEditora, javax.swing.GroupLayout.PREFERRED_SIZE, 58, javax.swing.GroupLayout.PREFERRED_SIZE)))))
-                .addContainerGap(133, Short.MAX_VALUE))
+                .addContainerGap(193, Short.MAX_VALUE))
             .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(btnGravar, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(btnLimpar)
-                    .addComponent(txtExcluir))
+                    .addComponent(txtExcluir)
+                    .addComponent(btnGravar, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(24, 24, 24)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel1)
@@ -175,8 +199,7 @@ public class CadastroLivro extends javax.swing.JInternalFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(txtTitulo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 114, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(15, Short.MAX_VALUE))
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 168, Short.MAX_VALUE))
         );
 
         pack();
@@ -193,6 +216,28 @@ public class CadastroLivro extends javax.swing.JInternalFrame {
     private void txtExcluirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtExcluirActionPerformed
        deleteLivro();
     }//GEN-LAST:event_txtExcluirActionPerformed
+
+    private void txtIdGeneroKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtIdGeneroKeyTyped
+        if (evt.getKeyChar() == 10) {
+            txtIdAutor.grabFocus();
+        }
+    }//GEN-LAST:event_txtIdGeneroKeyTyped
+
+    private void txtIdAutorKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtIdAutorKeyTyped
+        if (evt.getKeyChar() == 10) {
+            txtIdEditora.grabFocus();
+        }
+    }//GEN-LAST:event_txtIdAutorKeyTyped
+
+    private void txtIdEditoraKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtIdEditoraKeyTyped
+        if (evt.getKeyChar() == 10) {
+            txtTitulo.grabFocus();
+        }
+    }//GEN-LAST:event_txtIdEditoraKeyTyped
+
+    private void txtTituloActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtTituloActionPerformed
+        addLivro();
+    }//GEN-LAST:event_txtTituloActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

@@ -71,7 +71,19 @@ public class CadastroFuncionario extends javax.swing.JInternalFrame {
 
         jLabel2.setText("IdPessoa");
 
+        txtIdPessoa.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txtIdPessoaKeyTyped(evt);
+            }
+        });
+
         jLabel3.setText("Salario");
+
+        txtSalario.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtSalarioActionPerformed(evt);
+            }
+        });
 
         tblFuncionario.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -184,6 +196,16 @@ public class CadastroFuncionario extends javax.swing.JInternalFrame {
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
         deleteFuncionario();
     }//GEN-LAST:event_jButton3ActionPerformed
+
+    private void txtIdPessoaKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtIdPessoaKeyTyped
+        if (evt.getKeyChar()== 10) {
+            txtSalario.grabFocus();
+        }
+    }//GEN-LAST:event_txtIdPessoaKeyTyped
+
+    private void txtSalarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtSalarioActionPerformed
+        addFuncionario();
+    }//GEN-LAST:event_txtSalarioActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

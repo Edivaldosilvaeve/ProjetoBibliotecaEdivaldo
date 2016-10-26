@@ -78,6 +78,35 @@ public class CadastroLogin extends javax.swing.JInternalFrame {
 
         txtIdLogin.setEnabled(false);
 
+        txtIdFuncionario.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtIdFuncionarioActionPerformed(evt);
+            }
+        });
+        txtIdFuncionario.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txtIdFuncionarioKeyTyped(evt);
+            }
+        });
+
+        txtIdGrupo.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txtIdGrupoKeyTyped(evt);
+            }
+        });
+
+        txtNome.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txtNomeKeyTyped(evt);
+            }
+        });
+
+        txtSenha.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtSenhaActionPerformed(evt);
+            }
+        });
+
         btnGravar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/Save-icon.png"))); // NOI18N
         btnGravar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -210,6 +239,32 @@ public class CadastroLogin extends javax.swing.JInternalFrame {
        carregaUsuario();
     }//GEN-LAST:event_tblLoginMouseClicked
 
+    private void txtIdFuncionarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtIdFuncionarioActionPerformed
+        
+    }//GEN-LAST:event_txtIdFuncionarioActionPerformed
+
+    private void txtIdFuncionarioKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtIdFuncionarioKeyTyped
+        if (evt.getKeyChar() == 10) {
+            txtIdGrupo.grabFocus();
+        }
+    }//GEN-LAST:event_txtIdFuncionarioKeyTyped
+
+    private void txtIdGrupoKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtIdGrupoKeyTyped
+        if (evt.getKeyChar() == 10) {
+            txtNome.grabFocus();
+        }
+    }//GEN-LAST:event_txtIdGrupoKeyTyped
+
+    private void txtNomeKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtNomeKeyTyped
+        if (evt.getKeyChar() == 10) {
+            txtSenha.grabFocus();
+        }
+    }//GEN-LAST:event_txtNomeKeyTyped
+
+    private void txtSenhaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtSenhaActionPerformed
+        addLogin();
+    }//GEN-LAST:event_txtSenhaActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnExcluir;
@@ -255,7 +310,7 @@ public class CadastroLogin extends javax.swing.JInternalFrame {
         usuario.setIdGrupo(Integer.parseInt(txtIdGrupo.getText()));
 
         if (usuarioController.insereUsuario(usuario)) {
-            JOptionPane.showMessageDialog(null, "Usuario Gravado com Sucesso");
+            JOptionPane.showMessageDialog(null, "Usuario Login Gravado com Sucesso");
             listaUsuario();
             // insereTabela(pessoa);
            limpaCampos();

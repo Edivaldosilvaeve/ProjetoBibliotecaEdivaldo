@@ -145,12 +145,25 @@
       </Properties>
     </Component>
     <Component class="javax.swing.JTextField" name="txtIdFuncionario">
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="txtIdFuncionarioActionPerformed"/>
+        <EventHandler event="keyTyped" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="txtIdFuncionarioKeyTyped"/>
+      </Events>
     </Component>
     <Component class="javax.swing.JTextField" name="txtIdGrupo">
+      <Events>
+        <EventHandler event="keyTyped" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="txtIdGrupoKeyTyped"/>
+      </Events>
     </Component>
     <Component class="javax.swing.JTextField" name="txtNome">
+      <Events>
+        <EventHandler event="keyTyped" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="txtNomeKeyTyped"/>
+      </Events>
     </Component>
     <Component class="javax.swing.JTextField" name="txtSenha">
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="txtSenhaActionPerformed"/>
+      </Events>
     </Component>
     <Component class="javax.swing.JButton" name="btnGravar">
       <Properties>

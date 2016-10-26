@@ -223,6 +223,23 @@ public class CadastroPessoa extends javax.swing.JInternalFrame {
         });
 
         txtEndereco.setEnabled(false);
+        txtEndereco.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtEnderecoActionPerformed(evt);
+            }
+        });
+
+        jdcDataNascimento.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                jdcDataNascimentoKeyTyped(evt);
+            }
+        });
+
+        jdcDataCadastro.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                jdcDataCadastroKeyTyped(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -293,11 +310,7 @@ public class CadastroPessoa extends javax.swing.JInternalFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
                         .addGap(83, 83, 83)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel6)
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                                .addGap(25, 25, 25)
-                                .addComponent(txtRG, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                        .addComponent(jLabel6))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(23, 23, 23)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -311,13 +324,15 @@ public class CadastroPessoa extends javax.swing.JInternalFrame {
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createSequentialGroup()
                                 .addComponent(jLabel4)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(txtCPF, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                    .addComponent(txtCPF, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(txtRG, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                             .addGroup(layout.createSequentialGroup()
                                 .addComponent(jLabel5)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                 .addComponent(txtSexo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGap(8, 8, 8)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addGroup(layout.createSequentialGroup()
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 7, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -374,7 +389,7 @@ public class CadastroPessoa extends javax.swing.JInternalFrame {
 
     private void txtNomeKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtNomeKeyPressed
         if (evt.getKeyCode() == 10) {
-            txtCPF.grabFocus();
+            txtRG.grabFocus();
         }
 
     }//GEN-LAST:event_txtNomeKeyPressed
@@ -388,14 +403,14 @@ public class CadastroPessoa extends javax.swing.JInternalFrame {
 
     private void txtSexoKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtSexoKeyPressed
         if (evt.getKeyCode() == 10) {
-            txtRG.grabFocus();
+            jdcDataNascimento.grabFocus();
         }
 
     }//GEN-LAST:event_txtSexoKeyPressed
 
     private void txtRGKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtRGKeyPressed
         if (evt.getKeyCode() == 10) {
-            jdcDataNascimento.grabFocus();
+            txtCPF.grabFocus();
         }
     }//GEN-LAST:event_txtRGKeyPressed
 
@@ -414,6 +429,22 @@ public class CadastroPessoa extends javax.swing.JInternalFrame {
             txtNome.grabFocus();
         }
     }//GEN-LAST:event_btnNovoMousePressed
+
+    private void jdcDataNascimentoKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jdcDataNascimentoKeyTyped
+       if (evt.getKeyChar()== 10) {
+            jdcDataCadastro.grabFocus();
+        }
+    }//GEN-LAST:event_jdcDataNascimentoKeyTyped
+
+    private void jdcDataCadastroKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jdcDataCadastroKeyTyped
+        if (evt.getKeyChar()== 10) {
+            txtFone.grabFocus();
+        }
+    }//GEN-LAST:event_jdcDataCadastroKeyTyped
+
+    private void txtEnderecoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtEnderecoActionPerformed
+        addPessoa();
+    }//GEN-LAST:event_txtEnderecoActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
