@@ -100,6 +100,9 @@ public class UsuarioDao {
                     + "')";
             System.out.println(sql);
             st.execute(sql);
+
+        
+
             return true;
         } catch (SQLException ex) {
             System.out.println("Problema ao inserir usuario" + ex);
@@ -108,25 +111,26 @@ public class UsuarioDao {
         }
         return false;
     }
-      public boolean updateLogin(Usuario usuario) {
+
+    public boolean updateLogin(Usuario usuario) {
         Date data = new Date();
         String sql = "UPDATE login SET "
-                + "idlogin=" + usuario.getIdlogin()+ ","
-                + "idfuncionario=" + usuario.getIdFuncionario()+ ","
-                + "descricao='" + usuario.getLogin()+ "', "
-                + "senha='" + usuario.getSenha()+ "',"
-                + "idgrupo='" + usuario.getIdGrupo()+ "',"
-                
-                + " WHERE idlogin=" + usuario.getIdlogin()+ ",";
+                + "idlogin=" + usuario.getIdlogin() + ","
+                + "idfuncionario=" + usuario.getIdFuncionario() + ","
+                + "descricao='" + usuario.getLogin() + "', "
+                + "senha='" + usuario.getSenha() + "',"
+                + "idgrupo='" + usuario.getIdGrupo() + "',"
+                + " WHERE idlogin=" + usuario.getIdlogin() + ",";
         try {
             st.executeUpdate(sql);
             return true;
         } catch (SQLException ex) {
-            JOptionPane.showMessageDialog(null, "Erro de Update" + ex + "\n" +sql );
+            JOptionPane.showMessageDialog(null, "Erro de Update" + ex + "\n" + sql);
         }
         return false;
     }
-      public ArrayList<Usuario> getUsuario() {
+
+    public ArrayList<Usuario> getUsuario() {
         ResultSet rs;
         Usuario usuario;
         ArrayList<Usuario> lista = new ArrayList<>();
@@ -138,7 +142,7 @@ public class UsuarioDao {
                 usuario.setIdFuncionario(rs.getInt("IDFUNCIONARIO"));
                 usuario.setIdGrupo(rs.getInt("IDGRUPO"));
                 usuario.setLogin(rs.getString("DESCRICAO"));
-                usuario.setSenha(rs.getString("SENHA"));                
+                usuario.setSenha(rs.getString("SENHA"));
                 lista.add(usuario);
             }
         } catch (SQLException ex) {
@@ -146,7 +150,7 @@ public class UsuarioDao {
         }
         return lista;
     }
-    
+
     public boolean deleteUsuario(int id) {
         String sql = "DELETE FROM LOGIN WHERE IDLOGIN = " + id;
         try {

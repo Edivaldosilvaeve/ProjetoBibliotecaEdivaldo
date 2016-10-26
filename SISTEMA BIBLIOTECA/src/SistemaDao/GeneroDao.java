@@ -136,7 +136,7 @@ public class GeneroDao {
     }    
      
       public boolean deleteGenero(int id) {
-        String sql = "DELETE FROM GENERO WHERE IDGENERO = " + id;
+        String sql = "DELETE FROM GENEROS WHERE IDGENERO = " + id;
         try {
             st.execute(sql);
             return true;

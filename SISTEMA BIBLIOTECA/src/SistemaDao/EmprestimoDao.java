@@ -103,7 +103,7 @@ public class EmprestimoDao {
         Emprestimos emprestimos;
         ArrayList<Emprestimos> lista = new ArrayList<>();
         try {
-           rs = st.executeQuery(" IDemprestimo, EMPRESTIMOS.idusuario, idlivro, previsao_entrega, data_devolucao FROM EMPRESTIMOS LEFT JOIN USUARIOS ON EMPRESTIMOS.IDUSUARIO = USUARIOS.IDUSUARIO LEFT JOIN PESSOAS ON PESSOAS.PESSOAID = EMPRESTIMOS.IDUSUARIO WHERE LOWER(PESSOAS.NOME) LIKE  LOWER('%"+nome+"%')");            
+           rs = st.executeQuery(" IDemprestimo, EMPRESTIMOS.idusuario, idlivro, previsao_entrega, data_devolucao FROM EMPRESTIMOS LEFT JOIN PESSOAS ON PESSOAS.PESSOAID = EMPRESTIMOS.IDUSUARIO WHERE LOWER(PESSOAS.NOME) LIKE  LOWER('%"+nome+"%')");            
             while (rs.next()) {
                 emprestimos = new Emprestimos();
                 emprestimos.setIdEmprestimo(rs.getInt("IDEMPRESTIMOS"));

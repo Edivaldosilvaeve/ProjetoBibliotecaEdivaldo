@@ -75,6 +75,11 @@ public class CadastroGenero extends javax.swing.JInternalFrame {
         });
 
         jButton3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/Lixeira_1.png"))); // NOI18N
+        jButton3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton3ActionPerformed(evt);
+            }
+        });
 
         btnPesquisar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/pesquisar.png"))); // NOI18N
         btnPesquisar.addActionListener(new java.awt.event.ActionListener() {
@@ -142,6 +147,10 @@ public class CadastroGenero extends javax.swing.JInternalFrame {
         limpaCampos();
     }//GEN-LAST:event_jButton2ActionPerformed
 
+    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
+        deleteGenero();
+    }//GEN-LAST:event_jButton3ActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnPesquisar;
@@ -160,33 +169,40 @@ public class CadastroGenero extends javax.swing.JInternalFrame {
         }
         if (genero == null) {
             genero = new Genero();
-        }      
-        
+        }
+
         genero.setGenero(txtGenero.getText());
-        
 
         if (generoController.insereGenero(genero)) {
             JOptionPane.showMessageDialog(null, "Usuario Gravado com Sucesso");
             //listaUsuario();
             // insereTabela(pessoa);
-           limpaCampos();
+            limpaCampos();
 
         }
-         
+
     }
 
     private void setGeneroSelecionado(Genero genero) {
+        this.genero = genero;
         txtGenero.setText(genero.getGenero());
         txtIdGenero.setText(genero.getIdGenero() + "");
 
     }
-    
-    
-    
-    private void limpaCampos(){
+
+    private void limpaCampos() {
         genero = null;
         txtGenero.setText("");
-    }    
-    
+    }
+
+    private void deleteGenero() {
+        if (generoController == null) {
+            generoController = new GeneroController();
+        }
+
+        generoController.deleteGenero(genero.getIdGenero());
+        
+        limpaCampos();
+    }
 
 }

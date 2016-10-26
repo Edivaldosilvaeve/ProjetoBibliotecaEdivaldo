@@ -57,7 +57,6 @@ public class SistemaDao {
                     + " AND SENHA = '" + sistema.getSenha() + "'";
 
             ResultSet rs;
-           
 
             rs = st.executeQuery(sql);
 
@@ -106,6 +105,7 @@ public class SistemaDao {
                     + "')";
             System.out.println(sql);
             st.execute(sql);
+            
             return true;
         } catch (SQLException ex) {
             System.out.println("Problema ao inserir usuario" + ex);
@@ -157,23 +157,22 @@ public class SistemaDao {
             st.executeUpdate(sql);
             return true;
         } catch (SQLException ex) {
-            JOptionPane.showMessageDialog(null, "Erro de Update" + ex + "\n" +sql );
+            JOptionPane.showMessageDialog(null, "Erro de Update" + ex + "\n" + sql);
         }
         return false;
     }
 
-    public ArrayList<Pessoa> getPesquisar(String nome){
-        ResultSet rs;  
-       
+    public ArrayList<Pessoa> getPesquisar(String nome) {
+        ResultSet rs;
 
         Pessoa pesquisa;
         ArrayList<Pessoa> lista = new ArrayList<>();
         try {
-            rs = st.executeQuery("SELECT PESSOAID, NOME, CPF, RG, SEXO, DATANASCIMENTO, TELEFONE, ENDERECO, DATACADASTRO FROM PESSOAS WHERE NOME like '%"+nome+"%'");
+            rs = st.executeQuery("SELECT PESSOAID, NOME, CPF, RG, SEXO, DATANASCIMENTO, TELEFONE, ENDERECO, DATACADASTRO FROM PESSOAS WHERE NOME like '%" + nome + "%'");
             while (rs.next()) {
                 pesquisa = new Pessoa();
                 pesquisa.setNome(rs.getString("NOME"));
-                pesquisa.setIdpessoa(rs.getInt("PESSOAID"));                
+                pesquisa.setIdpessoa(rs.getInt("PESSOAID"));
                 pesquisa.setCpf(rs.getString("CPF"));
                 pesquisa.setRg(rs.getString("RG"));
                 pesquisa.setSexo(rs.getString("SEXO"));
@@ -188,7 +187,7 @@ public class SistemaDao {
         }
         return lista;
     }
-    
+
     public boolean deletePessoa(int id) {
         String sql = "DELETE FROM PESSOAS WHERE PESSOAID = " + id;
         try {

@@ -7,10 +7,12 @@ package ViewPrincipal;
 
 import Controller.SistemaController;
 import Model.Pessoa;
+import componentes.DateUtils;
 import java.awt.Dimension;
 import java.awt.Point;
 import java.awt.Toolkit;
 import java.util.ArrayList;
+import java.util.Date;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
@@ -64,10 +66,8 @@ public class CadastroPessoa extends javax.swing.JInternalFrame {
         txtIdPessoa = new javax.swing.JTextField();
         txtCPF = new javax.swing.JTextField();
         txtSexo = new javax.swing.JComboBox<>();
-        txtDataNascimento = new javax.swing.JFormattedTextField();
         txtFone = new javax.swing.JTextField();
         txtRG = new javax.swing.JTextField();
-        txtDataCadastro = new javax.swing.JFormattedTextField();
         jScrollPane3 = new javax.swing.JScrollPane();
         tblPessoa = new javax.swing.JTable();
         btnNovo = new javax.swing.JButton();
@@ -76,6 +76,8 @@ public class CadastroPessoa extends javax.swing.JInternalFrame {
         btnGravar = new javax.swing.JButton();
         txtNome = new javax.swing.JTextField();
         txtEndereco = new javax.swing.JTextField();
+        jdcDataNascimento = new com.toedter.calendar.JDateChooser();
+        jdcDataCadastro = new com.toedter.calendar.JDateChooser();
 
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -145,13 +147,6 @@ public class CadastroPessoa extends javax.swing.JInternalFrame {
             }
         });
 
-        txtDataNascimento.setEnabled(false);
-        txtDataNascimento.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyPressed(java.awt.event.KeyEvent evt) {
-                txtDataNascimentoKeyPressed(evt);
-            }
-        });
-
         txtFone.setEnabled(false);
         txtFone.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
@@ -165,8 +160,6 @@ public class CadastroPessoa extends javax.swing.JInternalFrame {
                 txtRGKeyPressed(evt);
             }
         });
-
-        txtDataCadastro.setEnabled(false);
 
         tblPessoa.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -272,13 +265,16 @@ public class CadastroPessoa extends javax.swing.JInternalFrame {
                         .addComponent(txtNome, javax.swing.GroupLayout.PREFERRED_SIZE, 461, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(txtDataNascimento, javax.swing.GroupLayout.PREFERRED_SIZE, 127, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel7))
-                        .addGap(28, 28, 28)
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(jLabel7)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(jdcDataNascimento, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addGap(19, 19, 19)))
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(txtDataCadastro, javax.swing.GroupLayout.PREFERRED_SIZE, 174, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel10))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jLabel10)
+                            .addComponent(jdcDataCadastro, javax.swing.GroupLayout.PREFERRED_SIZE, 169, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel8)
                             .addComponent(txtFone, javax.swing.GroupLayout.PREFERRED_SIZE, 195, javax.swing.GroupLayout.PREFERRED_SIZE))))
@@ -289,10 +285,10 @@ public class CadastroPessoa extends javax.swing.JInternalFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(btnLimpar)
                     .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                         .addComponent(btnNovo)
-                        .addComponent(btnExcluir)
-                        .addComponent(btnLimpar))
+                        .addComponent(btnExcluir))
                     .addComponent(btnGravar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
@@ -322,12 +318,12 @@ public class CadastroPessoa extends javax.swing.JInternalFrame {
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                 .addComponent(txtSexo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addGroup(layout.createSequentialGroup()
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 7, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addComponent(jLabel7)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(txtDataNascimento, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jdcDataNascimento, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createSequentialGroup()
@@ -336,16 +332,16 @@ public class CadastroPessoa extends javax.swing.JInternalFrame {
                             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                                 .addComponent(jLabel10)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)))
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addComponent(txtFone, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(txtDataCadastro, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                            .addComponent(jdcDataCadastro, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jLabel9)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(txtEndereco, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 151, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(15, Short.MAX_VALUE))
         );
 
         pack();
@@ -357,7 +353,7 @@ public class CadastroPessoa extends javax.swing.JInternalFrame {
 
     private void btnNovoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNovoActionPerformed
         novo();
-        
+
     }//GEN-LAST:event_btnNovoActionPerformed
 
     private void btnGravarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGravarActionPerformed
@@ -394,20 +390,14 @@ public class CadastroPessoa extends javax.swing.JInternalFrame {
         if (evt.getKeyCode() == 10) {
             txtRG.grabFocus();
         }
-          
+
     }//GEN-LAST:event_txtSexoKeyPressed
 
     private void txtRGKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtRGKeyPressed
         if (evt.getKeyCode() == 10) {
-            txtDataNascimento.grabFocus();
+            jdcDataNascimento.grabFocus();
         }
     }//GEN-LAST:event_txtRGKeyPressed
-
-    private void txtDataNascimentoKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtDataNascimentoKeyPressed
-        if (evt.getKeyCode() == 10) {
-            txtFone.grabFocus();
-        }
-    }//GEN-LAST:event_txtDataNascimentoKeyPressed
 
     private void txtFoneKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtFoneKeyPressed
         if (evt.getKeyCode() == 10) {
@@ -416,11 +406,11 @@ public class CadastroPessoa extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_txtFoneKeyPressed
 
     private void btnNovoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnNovoMouseClicked
-       
+
     }//GEN-LAST:event_btnNovoMouseClicked
 
     private void btnNovoMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnNovoMousePressed
-         if (evt.getClickCount() == 10) {
+        if (evt.getClickCount() == 10) {
             txtNome.grabFocus();
         }
     }//GEN-LAST:event_btnNovoMousePressed
@@ -445,10 +435,10 @@ public class CadastroPessoa extends javax.swing.JInternalFrame {
     private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JTable jTable1;
     private javax.swing.JTable jTable2;
+    private com.toedter.calendar.JDateChooser jdcDataCadastro;
+    private com.toedter.calendar.JDateChooser jdcDataNascimento;
     private javax.swing.JTable tblPessoa;
     private javax.swing.JTextField txtCPF;
-    private javax.swing.JFormattedTextField txtDataCadastro;
-    private javax.swing.JFormattedTextField txtDataNascimento;
     private javax.swing.JTextField txtEndereco;
     private javax.swing.JTextField txtFone;
     private javax.swing.JTextField txtIdPessoa;
@@ -485,7 +475,8 @@ public class CadastroPessoa extends javax.swing.JInternalFrame {
         pessoa.setNome(txtNome.getText());
         pessoa.setCpf(txtCPF.getText());
         pessoa.setRg(txtRG.getText());
-        pessoa.setDatanascimento(txtDataNascimento.getText());
+
+        pessoa.setDatanascimento(DateUtils.convertData(jdcDataNascimento.getDate()));
         pessoa.setFone(txtFone.getText());
         if (txtSexo.getSelectedIndex() == 0) {
             pessoa.setSexo("M");
@@ -494,7 +485,8 @@ public class CadastroPessoa extends javax.swing.JInternalFrame {
         }
 
         pessoa.setEndereco(txtEndereco.getText());
-        pessoa.setDatacadastro(txtDataCadastro.getText());
+
+        pessoa.setDatacadastro(DateUtils.convertData(jdcDataCadastro.getDate()));
 
         if (sistemaController.inserePessoa(pessoa)) {
             listaPessoa();
@@ -537,11 +529,11 @@ public class CadastroPessoa extends javax.swing.JInternalFrame {
         txtNome.setText("");
         txtCPF.setText("");
         txtRG.setText("");
-        txtDataNascimento.setText("");
+        jdcDataNascimento.setDate(new Date());
         txtFone.setText("");
         txtSexo.setSelectedIndex(0);
         txtEndereco.setText("");
-        txtDataCadastro.setText("");
+        jdcDataCadastro.setDate(new Date());
 
     }
 
@@ -555,7 +547,7 @@ public class CadastroPessoa extends javax.swing.JInternalFrame {
         for (int x = 0; x < listaPessoa.size(); x++) {
             Pessoa us = listaPessoa.get(x);
             if (id == us.getIdpessoa()) {
-               // txtPesquisa.setText(us.getIdpessoa() + "");
+                // txtPesquisa.setText(us.getIdpessoa() + "");
                 txtNome.setText(us.getNome());
                 txtCPF.setText(us.getCpf());
                 txtRG.setText(us.getRg());
@@ -565,10 +557,11 @@ public class CadastroPessoa extends javax.swing.JInternalFrame {
                 } else {
                     txtSexo.setSelectedIndex(1);
                 }
-                txtDataNascimento.setText(us.getDatanascimento());
+
+                jdcDataNascimento.setDate(new Date(us.getDatanascimento()));
                 txtFone.setText(us.getFone() + "");
                 txtEndereco.setText(us.getEndereco());
-                txtDataCadastro.setText(us.getDatacadastro());
+                jdcDataCadastro.setDate(new Date(us.getDatacadastro()));
                 pessoa = us;
                 break;
             }
@@ -579,11 +572,11 @@ public class CadastroPessoa extends javax.swing.JInternalFrame {
         txtNome.setEnabled(true);
         txtCPF.setEnabled(true);
         txtEndereco.setEnabled(true);
-        txtDataCadastro.setEnabled(true);
+        jdcDataCadastro.setEnabled(true);
         txtRG.setEnabled(true);
-        txtDataNascimento.setEnabled(true);
+        jdcDataNascimento.setEnabled(true);
         txtFone.setEnabled(true);
-       // btnEditar.setEnabled(true);
+        // btnEditar.setEnabled(true);
     }
 
     private void deletePessoa() {
